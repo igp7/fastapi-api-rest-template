@@ -1,0 +1,96 @@
+[project]
+name = "template-api-rest-fastapi"
+version = "0.2.0"
+description = "Template de un servicio API Rest desarrollado en Python con el framework FastAPI. El template cubre la de gestión de usuarios y tokens jwt para autenticación."
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "email-validator==2.2.0",
+    "fastapi[all]==0.115.0",
+    "passlib[bcrypt]==1.7.4",
+    "psycopg2-binary==2.9.9",
+    "pyjwt[crypto]==2.9.0",
+    "python-dotenv==1.0.1",
+    "sqlalchemy==2.0.35",
+    "tenacity==9.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest-cov==5.0.0",
+    "pytest-env==1.1.5",
+    "pytest==8.3.3",
+    "ruff==0.7.0",
+]
+
+[tool.ruff]
+# Excluir directorios comúnmente ignorados
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# La versión mínima de Python a la que apuntar, por ejemplo:
+#   - Cuando se consideran actualizaciones automáticas de código, como la reescritura de anotaciones de tipo
+# Ruff no propondrá cambios usando características que no estén disponibles en la versión dada
+target-version = "py312"
+
+
+[tool.ruff.lint]
+select = [
+    "I", # isort (Ordenacion de imports alfabéticamente y separarlas automáticamente en secciones y por tipo)
+    "UP", # pyupgrade (Actualizacion automáticamente la sintaxis para las nuevas versiones de Python)
+    "N", # pep8-naming (Verificacion de las convenciones de naming de PEP 8)
+    "B", # flake8-bugbear (Busqueda de posibles bugs y problemas de diseño)
+    "SIM", # flake8-simplify (Simplificacion de codigo)
+    "PD", # pandas-vet (Reglas para codigo de pandas)
+    "F", # Pyflakes (Análisis y detección de errores)
+    "E", # pycodestyle (Error) (Verificacion de convenciones de estilo de PEP 8)
+    "W", # pycodestyle (Warning) (Verificacion de convenciones de estilo de PEP 8)
+    "S", # flake8-bandit (Pruebas de seguridad)
+    "T20", # flake8-print (Busqueda de prints)
+    "PT", # flake8-pytest-style (Comprueba problemas comunes de estilo o inconsistencias con pruebas basadas en pytest)
+    "PL", # Pylint (Comprueba si hay errores, aplica un estándar de codificación, busca code smells y puede hacer sugerencias sobre cómo se podría refactorizar el código)
+    "PERF", # Perflint (Busqueda de antipatrones de rendimiento)
+    "LOG", # flake8-logging (Comprueba los problemas utilizando el módulo de logging de la biblioteca estándar)
+    "RUF", # Ruff-specific rules
+    "FAST" # FastAPI (Reglas de para FastAPI)
+]
+
+ignore = [
+    "UP015", # Omitir tipo de apertura de ficheros cuando es en modo lectura "r" (pyupgrade)
+    "SIM300", # Comprueba las condiciones que sitúan una constante en el lado izquierdo del operador de comparación, en lugar del lado derecho.
+    "E501", # Comprueba si hay líneas que superan la longitud máxima de caracteres especificada
+    "S701", # Usar plantillas jinja2 con autoescape=False es peligroso y puede llevar a XSS. Asegúrese de que autoescape=True o utilice la función select_autoescape.
+    "PLR0915", # Comprueba si hay funciones o métodos con demasiadas sentencias.
+    "S101" # Comprueba el uso de assert
+]
+
+# Permitir la corrección de todas las reglas activadas (cuando se proporciona `--fix`)
+fixable = ["ALL"]
+unfixable = []
+
